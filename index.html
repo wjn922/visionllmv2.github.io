@@ -198,10 +198,17 @@
           <p>
             <b>Architecture.</b>
             VisionLLM v2 consists of four parts:
+            (1) An image encoder and a region encoder that encode the image-level and region-level information;     
+            (2) A large language model (LLM) that models the multimodal inputs and generates satisfactory textual responses; 
+            (3) A series of task-specific decoders for performing downstream tasks;
+            (4) A super link that uses routing tokens and super-link queries for efficient and conflict-free information transmission.
           </p>
           <p>
-            <b>Super-Link Technique.</b>
-            VisionLLM v2 consists of four parts:
+            <b>Super Link Technique.</b>
+            The super link is proposed to tackle the challenge of selecting the appropriate decoder, avoiding task conflicts, and facilitating effective information transmission between the LLM and the decoders. 
+            It comprises of two parts:
+            (1) Routing Tokens. We add the routing tokens, e.g., [DET], [SEG], [GEN], as the special tokens to the LLM vocabulary. They play as the trigger to select appropriate task-specific decoders when the model intends to complete the downstream tasks.
+            (2) Super-Link Queries. For each decoder, we define the super-link  queries as a fixed set of embeddings. The super-link queries would be automatically appended after the input embeddings of the routing token. Their corresponding hidden states serve as the condition for decoders.
           </p>
           <img src="./static/images/arch.png" alt="architecture" class="method-overview-full-img  method-overview" draggable="false" />
         </div>
